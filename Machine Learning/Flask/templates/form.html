@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Asteroids parameters:{% endblock %}
+
+{% block content %}
+    {% with messages  = get_flashed_messages() %}
+        {%if messages %}
+            {% for msg in messages%}
+                <p>{{msg}}</p>
+            {% endfor%}
+        {% endif %}
+    {% endwith %}
+
+<style>
+table {
+    border-spacing: 105px;
+    }
+</style>
+
+<!-- <form action="/results" method="post"> -->
+<form method="post">    
+    <table>
+        <!-- Table Header Row -->
+        <thead>
+          <tr>
+            <th>Asteroid data</th>
+            <th></th>
+            <th></th>
+            <th>Mean Values</th>
+            <th></th>
+            <!-- <th style="text-align:center"><button id="haz_but">Hazardous</button></th> -->
+            
+            <th style="text-align:center"><input type="submit" name="haz_but" value="Hazardous"/></th>
+            <!-- <th>Hazardous</th> -->
+            <th></th>
+            <th style="text-align:center"><input type="submit" name="not_haz_but" value="Not Hazardous"/></th>
+          </tr>
+        </thead>
+    
+
+        <tbody>
+            {%for i in range(0, len_fl)%}
+            <tr>  
+                <td><label for="{{feature_list[i]}}">{{feature_list[i]}}:</label></td>
+                <td style="text-align:right"><input type="number" step="any" id="{{feature_list[i]}}" name="{{feature_list[i]}}" /></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td style="text-align:right">{{feature_means[i]}}</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td style="text-align:right">{{hazardous_values[i]}}</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td style="text-align:right">{{not_hazardous_values[i]}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+   </table>     
+        
+
+
+	<p><input type="submit" name="submit" value="Submit"/></p>
+</form>
+
+{% endblock %}
+
